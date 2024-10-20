@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "VoiceGPT",
+  "description": "Add voice input functionality to ChatGPT, Press Ctrl+Q to open voice input",
+  "version": "1.0.0",
+  "permissions": ["activeTab", "scripting", "commands", "microphone"],
+  "host_permissions": ["https://chatgpt.com/*"],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://chatgpt.com/*"],
+      "js": ["src/content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "index.html"
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Q",
+        "mac": "Command+Q"
+      },
+      "description": "Open voice input"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["src/permission.html", "src/requestPermission.js"],
+      "matches": ["https://chatgpt.com/*"]
+    }
+  ]
+}
