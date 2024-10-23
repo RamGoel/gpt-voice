@@ -2,8 +2,8 @@
   "manifest_version": 3,
   "name": "VoiceGPT",
   "description": "Add voice input functionality to ChatGPT, Press Ctrl+Q to open voice input",
-  "version": "1.0.0",
-  "permissions": ["activeTab", "scripting", "commands", "microphone"],
+  "version": "1.0.1",
+  "permissions": ["commands"],
   "host_permissions": ["https://chatgpt.com/*"],
   "background": {
     "service_worker": "src/background.js"

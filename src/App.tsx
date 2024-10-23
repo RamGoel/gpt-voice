@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function App() {
@@ -16,7 +16,7 @@ export default function App() {
       setIsListening(true);
     };
 
-    recognition.onresult = (event) => {
+    recognition.onresult = (event: any) => {
       const currentTranscript = event.results[0][0].transcript;
       setTranscript(currentTranscript.trim());
       sendTranscript(currentTranscript.trim());
@@ -26,7 +26,7 @@ export default function App() {
       setIsListening(false);
     };
 
-    recognition.onerror = (event) => {
+    recognition.onerror = (event: any) => {
       console.error("Speech recognition error", event);
       setIsListening(false);
     };
@@ -35,25 +35,27 @@ export default function App() {
   };
 
   const startRecording = () => {
-    navigator.permissions.query({ name: "microphone" }).then((result) => {
-      if (result.state === "granted") {
-        startRecognition();
-      } else if (result.state === "prompt") {
-        navigator.mediaDevices
-          .getUserMedia({ audio: true })
-          .then(() => {
-            startRecognition();
-          })
-          .catch((err) => {
-            console.error("Microphone permission denied: ", err);
-            toast.error("Microphone permission denied: ", err);
-          });
-      } else if (result.state === "denied") {
-        toast.error(
-          "Microphone access is blocked. Please allow it from settings."
-        );
-      }
-    });
+    navigator.permissions
+      .query({ name: "microphone" as PermissionName })
+      .then((result) => {
+        if (result.state === "granted") {
+          startRecognition();
+        } else if (result.state === "prompt") {
+          navigator.mediaDevices
+            .getUserMedia({ audio: true })
+            .then(() => {
+              startRecognition();
+            })
+            .catch((err) => {
+              console.error("Microphone permission denied: ", err);
+              toast.error("Microphone permission denied: ", err);
+            });
+        } else if (result.state === "denied") {
+          toast.error(
+            "Microphone access is blocked. Please allow it from settings."
+          );
+        }
+      });
   };
 
   useEffect(() => {
@@ -62,7 +64,7 @@ export default function App() {
 
   const sendTranscript = (text: string) => {
     const chrome = (window as any).chrome;
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs: any) => {
       chrome.tabs.sendMessage(tabs[0].id, {
         action: "insertTranscript",
         transcript: text,

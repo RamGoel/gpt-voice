@@ -59,7 +59,7 @@ const injectMicrophonePermissionIframe = () => {
   iframe.setAttribute("hidden", "hidden");
   iframe.setAttribute("id", "permissionsIFrame");
   iframe.setAttribute("allow", "microphone");
-  iframe.src = chrome.runtime.getURL("scripts/permission.html");
+  iframe.src = chrome.runtime.getURL("src/permission.html");
   document.body.appendChild(iframe);
 };
 
