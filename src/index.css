@@ -1,8 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  width: 300px;
-  height: 300px;
+  width: 160px;
+  height: 180px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+}
+
+
+.infiniteZoomInOut {
+  animation: infiniteZoomInOut 3s infinite;
+}
+
+@keyframes infiniteZoomInOut {
+  0% {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(1.2);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  75% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }

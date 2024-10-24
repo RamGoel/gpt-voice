@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { RiMicLine } from "react-icons/ri";
 
 export default function App() {
   const [transcript, setTranscript] = useState("");
@@ -74,10 +75,20 @@ export default function App() {
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-bold mb-2">Voice Input</h1>
-      <p className="mb-2">{isListening ? "Listening..." : "Processing..."}</p>
-      <p className="italic">{transcript}</p>
+    <div className="h-[180px] flex flex-col items-center justify-center w-[160px] text-white bg-[#121212]">
+      <h1 className="text-xl font-semibold mb-2">Voice Input</h1>
+      <div className="infiniteZoomInOut my-2 w-[60px] h-[60px] flex items-center justify-center bg-red-600 rounded-full">
+        <RiMicLine className="w-10 h-10" />
+      </div>
+      {transcript ? (
+        <div className="h-[40px] w-11/12 mx-auto border p-1 border-neutral-800 border-dashed mt-2 rounded-lg">
+          <p className="line-clamp-2 !text-[11px] opacity-70">{transcript}</p>
+        </div>
+      ) : isListening ? (
+        <p className="mt-2 text-xs opacity-70">Listening...</p>
+      ) : (
+        <p className="mt-2 text-xs opacity-70">Processing...</p>
+      )}
     </div>
   );
 }
